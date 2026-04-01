@@ -1,39 +1,39 @@
-# Automation Scripts / Скрипты автоматизации
+# Automation Scripts
 
-Этот репозиторий содержит набор инструментов на базе **Playwright** и **TypeScript** для автоматизации рутинных повседневных задач.
+This repository contains a collection of Playwright and TypeScript-based tools for automating routine daily tasks.
 
-## 🚀 Текущие проекты:
+## Current Projects
 
-### 🕒 Attendance Automation (Автоматизация посещаемости)
-Скрипт для автоматического заполнения отчетов о посещаемости на портале Priority Connect.
-- **Интеллектуальный поиск**: Находит дни, отмеченные «розовым» статусом (нуждающиеся в отчете).
-- **Автозаполнение**: Вводит время начала/окончания смены и соответствующие комментарии.
-- **Безопасность**: Использует переменные окружения для защиты учетных данных.
-- **CI/CD**: Полностью настроен для автоматического запуска в **GitHub Actions** (каждый четверг в 17:00).
+### Attendance Automation
+A script for automatically filling attendance reports on the Priority Connect portal.
+- **Intelligent Search**: Identifies days marked with a "pink" status (pending report).
+- **Auto-fill**: Enters shift start/end times and appropriate remarks.
+- **Security**: Utilizes environment variables to protect credentials.
+- **CI/CD**: Configured for automatic execution in GitHub Actions every Thursday at 17:00 Israel time (14:00 UTC).
 
-## 🛠 Технологический стек:
-- **Playwright**: Мощный движок для автоматизации браузеров.
-- **TypeScript**: Строгая типизация для надежного кода.
-- **Page Object Model (POM)**: Профессиональная архитектура для поддержки и масштабируемости.
-- **Docker**: Оптимизация запуска в облаке.
+## Technology Stack
+- **Playwright**: Browser automation engine.
+- **TypeScript**: Typed language for reliable code.
+- **Page Object Model (POM)**: Professional architecture for maintainability.
+- **Docker**: Cloud execution optimization using official Playwright images.
 
-## ⚙️ Запуск:
+## Setup and Execution
 
-1. Установите зависимости:
+1. Install dependencies:
    ```bash
    npm install
    ```
-2. Создайте файл `.env` на основе примера и введите ваши данные:
+2. Create a .env file and define your credentials:
    ```env
    ATTENDANCE_LOGIN_USERNAME=your_username
    ATTENDANCE_LOGIN_PASSWORD=your_password
    ```
-3. Запустите скрипт:
+3. Run the script:
    ```bash
    npm run attendance
    ```
 
-## 📂 Структура проекта:
-- `src/core/`: Общие инструменты и универсальный раннер скриптов.
-- `src/attendance/`: Логика, страницы и типы для проекта Attendance.
-- `.github/workflows/`: Настройки автоматического запуска в облаке.
+## Project Structure
+- `src/core/`: Common tools and the universal script runner.
+- `src/attendance/`: Logic, pages, and types for the Attendance project.
+- `.github/workflows/`: Configuration for automated cloud execution.
