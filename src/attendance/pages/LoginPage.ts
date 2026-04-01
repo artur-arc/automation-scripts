@@ -1,5 +1,6 @@
 import { BasePage } from './BasePage.js';
 import { Page } from '@playwright/test';
+import { logger } from '../../utils';
 
 export class LoginPage extends BasePage {
   private readonly usernameInput = 'input.user-name';
@@ -19,7 +20,7 @@ export class LoginPage extends BasePage {
     await this.page.waitForURL(/attendance\/portal\/PP001#\/portal/);
 
     // Force redirect to #/attendance where the calendar is
-    console.log('--- Redirecting to attendance calendar...');
+    logger.log('--- Redirecting to attendance calendar...');
     await this.page.goto('https://p.priority-connect.online/attendance/portal/PP001#/attendance');
     await this.page.waitForURL(/attendance\/portal\/PP001#\/attendance/);
   }

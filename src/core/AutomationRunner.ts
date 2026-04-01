@@ -1,11 +1,16 @@
 import { chromium, Page, BrowserContext, Browser } from '@playwright/test';
+import { logger } from '../utils';
 import 'dotenv/config';
 
 export interface AutomationOptions {
   headless?: boolean;
 }
 
-export type AutomationTask = (page: Page, context: BrowserContext, browser: Browser) => Promise<void>;
+export type AutomationTask = (
+  page: Page,
+  context: BrowserContext,
+  browser: Browser,
+) => Promise<void>;
 
 /**
  * Generic runner for Playwright automation projects.
@@ -14,7 +19,7 @@ export type AutomationTask = (page: Page, context: BrowserContext, browser: Brow
  */
 export async function runAutomation(
   task: AutomationTask,
-  options: AutomationOptions = {}
+  options: AutomationOptions = {},
 ): Promise<void> {
   const isCi = !!process.env.CI;
   // If running in CI (GitHub Actions), always use headless mode.
@@ -27,8 +32,9 @@ export async function runAutomation(
 
   try {
     await task(page, context, browser);
-  } catch (error: any) {
-    console.error(`--- AUTOMATION SCRIPTERROR: ${error.message}`);
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : String(error);
+    logger.error(`--- AUTOMATION SCRIPTERROR: ${message}`);
     throw error;
   } finally {
     await browser.close();

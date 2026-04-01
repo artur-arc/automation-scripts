@@ -1,6 +1,6 @@
 import { BasePage } from './BasePage.js';
 import { Page, Locator } from '@playwright/test';
-import { DayInfo, AttendanceRecord } from '../types/index.js';
+import { AttendanceRecord } from '../types/index.js';
 
 export class AttendancePage extends BasePage {
   private readonly daySelector = '.weeks .day:not(.off-day)';
@@ -23,14 +23,15 @@ export class AttendancePage extends BasePage {
     const result: Locator[] = [];
 
     for (const day of days) {
-      const hasPink = await day.locator(this.pinkStatusSelector).count() > 0;
-      const hasGreen = await day.locator(this.greenStatusSelector).count() > 0;
-      const isToday = await day.locator('.dateNumber.TODAY').count() > 0;
+      const hasPink = (await day.locator(this.pinkStatusSelector).count()) > 0;
+      const hasGreen = (await day.locator(this.greenStatusSelector).count()) > 0;
+      const isToday = (await day.locator('.dateNumber.TODAY').count()) > 0;
 
       if (hasPink && !hasGreen && !isToday) {
         result.push(day);
       }
     }
+
     return result;
   }
 
@@ -57,6 +58,7 @@ export class AttendancePage extends BasePage {
   async waitForGreenStatus(day: Locator): Promise<boolean> {
     try {
       await day.locator(this.greenStatusSelector).waitFor({ state: 'attached', timeout: 15000 });
+
       return true;
     } catch {
       return false;
@@ -70,9 +72,10 @@ export class AttendancePage extends BasePage {
   }
 
   async getDayType(day: Locator): Promise<string> {
-    const className = await day.getAttribute('class') || '';
+    const className = (await day.getAttribute('class')) || '';
     if (className.includes('Day1')) return 'Day1';
     if (className.includes('Day3')) return 'Day3';
+
     return 'Other';
   }
 
