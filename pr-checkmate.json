@@ -18,7 +18,12 @@
     "rules": {}
   },
   "cspell": {
-    "words": ["Cooldown", "SCRIPTERROR"],
+    "words": [
+      "Cooldown",
+      "SCRIPTERROR",
+      "attendace",
+      "attendance"
+    ],
     "ignorePaths": [],
     "ignoreRegExpList": []
   },
