@@ -7,13 +7,15 @@ on:
 jobs:
   run-automation:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.49.1-jammy # Playwright's official container with browsers pre-installed
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
       - run: npm install
-      - run: npx playwright install chromium
+      # No need to run 'npx playwright install chromium' because it's already in the container!
       - run: npm run attendance
         env:
           ATTENDANCE_LOGIN_USERNAME: ${{ secrets.ATTENDANCE_LOGIN_USERNAME }}
