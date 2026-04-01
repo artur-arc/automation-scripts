@@ -15,7 +15,6 @@ jobs:
         with:
           node-version: '20'
       - run: npm install
-      # No need to run 'npx playwright install chromium' because it's already in the container!
       - run: npm run attendance
         env:
           ATTENDANCE_LOGIN_USERNAME: ${{ secrets.ATTENDANCE_LOGIN_USERNAME }}
