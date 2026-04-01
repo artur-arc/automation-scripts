@@ -1,0 +1,20 @@
+name: Attendance Automation
+on:
+  schedule:
+    - cron: '0 10 * * 4' # Every Thursday at 10:00 UTC
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  run-automation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install
+      - run: npx playwright install chromium
+      - run: npm run attendance
+        env:
+          ATTENDANCE_LOGIN_USERNAME: ${{ secrets.ATTENDANCE_LOGIN_USERNAME }}
+          ATTENDANCE_LOGIN_PASSWORD: ${{ secrets.ATTENDANCE_LOGIN_PASSWORD }}
