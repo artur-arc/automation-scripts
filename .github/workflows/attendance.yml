@@ -8,7 +8,7 @@ jobs:
   run-automation:
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.49.1-jammy # Playwright's official container with browsers pre-installed
+      image: mcr.microsoft.com/playwright:v1.59.0-jammy # Matches local package version
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
