@@ -16,7 +16,8 @@ export async function runAutomation(
   options: AutomationOptions = {}
 ): Promise<void> {
   const isCi = !!process.env.CI;
-  const headless = options.headless !== undefined ? options.headless : (isCi || true);
+  // Final fix: If in CI, it must be headless.
+  const headless = isCi ? true : (options.headless ?? false);
 
   const browser = await chromium.launch({ headless });
   const context = await browser.newContext();

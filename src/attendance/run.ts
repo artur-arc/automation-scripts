@@ -13,6 +13,7 @@ import { AttendanceService } from './AttendanceService.js';
 
   console.log('--- Starting Attendance Automation Project ---');
 
+  // Generic runner now handles headless automatically for CI
   await runAutomation(async (page) => {
     console.log('--- Navigating to portal...');
     await page.goto('https://p.priority-connect.online/attendance/portal/PP001#/attendance');
@@ -26,5 +27,5 @@ import { AttendanceService } from './AttendanceService.js';
       console.warn(`--- ERRORS:\n  ${result.errors.join('\n  ')}`);
     }
     console.log('----------------------------------------------------');
-  }, { headless: false }); // User requested headed mode for now
+  });
 })();
