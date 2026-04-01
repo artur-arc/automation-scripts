@@ -9,13 +9,14 @@ A script for automatically filling attendance reports on the Priority Connect po
 - **Intelligent Search**: Identifies days marked with a "pink" status (pending report).
 - **Auto-fill**: Enters shift start/end times and appropriate remarks.
 - **Security**: Utilizes environment variables to protect credentials.
-- **CI/CD**: Configured for automatic execution in GitHub Actions every Thursday at 17:00 Israel time (14:00 UTC).
+- **CI/CD**: Configured for automatic execution in GitHub Actions every Thursday at 17:00 Israel time
 
 ## Technology Stack
 - **Playwright**: Browser automation engine.
 - **TypeScript**: Typed language for reliable code.
 - **Page Object Model (POM)**: Professional architecture for maintainability.
 - **Docker**: Cloud execution optimization using official Playwright images.
+- **[♟️ PR CheckMate](https://www.npmjs.com/package/pr-checkmate)**: Automated code quality, formatting, and security standards monitoring.
 
 ## Setup and Execution
 
