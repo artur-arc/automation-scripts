@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { runAutomation } from '../index.js';
+import { runAutomation } from '../core/AutomationRunner.js';
 import { AttendanceService } from './AttendanceService.js';
 
 (async () => {

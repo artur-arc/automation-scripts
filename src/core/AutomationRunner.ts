@@ -10,13 +10,15 @@ export type AutomationTask = (page: Page, context: BrowserContext, browser: Brow
 /**
  * Generic runner for Playwright automation projects.
  * Handles specialized browser setup, context initialization, and cleanup.
+ * Automatically switches to headless mode in CI environments.
  */
 export async function runAutomation(
   task: AutomationTask,
   options: AutomationOptions = {}
 ): Promise<void> {
   const isCi = !!process.env.CI;
-  // Final fix: If in CI, it must be headless.
+  // If running in CI (GitHub Actions), always use headless mode.
+  // Otherwise, use the user-provided option (defaulting to local browser if not specified).
   const headless = isCi ? true : (options.headless ?? false);
 
   const browser = await chromium.launch({ headless });
