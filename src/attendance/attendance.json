@@ -1,6 +1,6 @@
 {
   "automation": {
-    "time": "17:00",
+    "time": "19:00",
     "timezone": "Asia/Jerusalem"
   },
   "baseUrl": "https://p.priority-connect.online/attendance/portal/PP001#/attendance",
@@ -14,7 +14,7 @@
     "tue": "home",
     "wed": "home",
     "thu": "home",
-    "fri": "offday",
-    "sat": "offday"
+    "fri": "off",
+    "sat": "off"
   }
 }

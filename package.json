@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "attendance": "tsx src/attendance/run.ts",
-    "sync-schedule": "tsx src/attendance/sync-schedule.ts",
+    "sync-schedule": "tsx src/utils/sync-schedule.ts src/attendance/attendance.json .github/workflows/attendance.yml",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

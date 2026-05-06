@@ -30,7 +30,7 @@ export const week = {
 export const place = {
   office: 'office',
   home: 'home',
-  offday: 'offday',
+  off: 'off',
 } as const;
 
 export type Day = keyof typeof week;

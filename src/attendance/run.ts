@@ -29,6 +29,8 @@ void (async (): Promise<void> => {
     logger.log('----------------------------------------------------');
   });
 })().catch(e => {
-  logger.error(`[runAutomation]: Critical script error: ${e instanceof Error ? e.message : String(e)}`);
+  logger.error(
+    `[runAutomation]: Critical script error: ${e instanceof Error ? e.message : String(e)}`,
+  );
   process.exit(1);
 });

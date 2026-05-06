@@ -39,8 +39,8 @@ export class AttendanceService {
           ? config.schedule[dayName as keyof typeof config.schedule]
           : place.home;
 
-        if (dayPlace === place.offday) {
-          logger.log(`--- SKIP: Day ${dateStr} is offday.`);
+        if (dayPlace === place.off) {
+          logger.log(`--- SKIP: Day ${dateStr} is off.`);
           continue;
         }
 
