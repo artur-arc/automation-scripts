@@ -1,7 +1,8 @@
 import { Page } from '@playwright/test';
-import { AutomationResult, week, schedule, place } from './types';
+import { AutomationResult, week, place } from './types';
 import { AttendancePage, LoginPage } from './pages';
 import { logger } from '../utils';
+import config from './attendance.json';
 
 export class AttendanceService {
   private readonly loginPage: LoginPage;
@@ -30,18 +31,27 @@ export class AttendanceService {
       for (const day of pinkDays) {
         const dateStr = await this.attendancePage.getDayDate(day);
         const dayType = await this.attendancePage.getDayType(day);
-        logger.log(`--- Processing day ${dateStr} (Type: ${dayType})...`);
+
+        const dayName = (Object.entries(week) as [keyof typeof week, string][]).find(
+          ([, code]) => code === dayType,
+        )?.[0];
+        const dayPlace = dayName
+          ? config.schedule[dayName as keyof typeof config.schedule]
+          : place.home;
+
+        if (dayPlace === place.offday) {
+          logger.log(`--- SKIP: Day ${dateStr} is offday.`);
+          continue;
+        }
+
+        logger.log(`--- Processing day ${dateStr} (${dayPlace})...`);
 
         try {
           await this.attendancePage.openAttendanceForDay(day);
 
-          const dayName = (Object.entries(week) as [keyof typeof week, string][]).find(
-            ([, code]) => code === dayType,
-          )?.[0];
-          const dayPlace = dayName ? schedule[dayName] : place.home;
           const record = {
-            inTime: '09:00',
-            outTime: '18:00',
+            inTime: config.defaults.inTime,
+            outTime: config.defaults.outTime,
             remarks: dayPlace === place.office ? 'office' : undefined,
           };
 
@@ -54,7 +64,7 @@ export class AttendanceService {
           } else {
             throw new Error(`Status didn't turn green for ${dateStr}`);
           }
-          await this.page.waitForTimeout(500); // Cooldown
+          await this.page.waitForTimeout(500);
         } catch (e: unknown) {
           const message = e instanceof Error ? e.message : String(e);
           logger.warn(`--- SKIP: Day ${dateStr} failed: ${message}`);

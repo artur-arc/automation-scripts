@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { runAutomation } from '../core/AutomationRunner';
 import { AttendanceService } from './AttendanceService';
 import { logger } from '../utils';
+import config from './attendance.json';
 
 void (async (): Promise<void> => {
   const username = process.env.ATTENDANCE_LOGIN_USERNAME;
@@ -13,10 +14,9 @@ void (async (): Promise<void> => {
 
   logger.log('--- Starting Attendance Automation Project ---');
 
-  // Generic runner now handles headless automatically for CI
   await runAutomation(async page => {
     logger.log('--- Navigating to portal...');
-    await page.goto('https://p.priority-connect.online/attendance/portal/PP001#/attendance');
+    await page.goto(config.baseUrl);
 
     const service = new AttendanceService(page);
     const result = await service.run(username, password);
@@ -29,6 +29,6 @@ void (async (): Promise<void> => {
     logger.log('----------------------------------------------------');
   });
 })().catch(e => {
-  logger.error(`Critical script error: ${e instanceof Error ? e.message : String(e)}`);
+  logger.error(`[runAutomation]: Critical script error: ${e instanceof Error ? e.message : String(e)}`);
   process.exit(1);
 });

@@ -23,20 +23,15 @@ export const week = {
   tue: 'Day3',
   wed: 'Day4',
   thu: 'Day5',
+  fri: 'Day6',
+  sat: 'Day7',
 } as const;
 
 export const place = {
   office: 'office',
   home: 'home',
+  offday: 'offday',
 } as const;
 
-type Day = keyof typeof week;
-type Place = (typeof place)[keyof typeof place];
-
-export const schedule: Record<Day, Place> = {
-  sun: place.home,
-  mon: place.home,
-  tue: place.home,
-  wed: place.home,
-  thu: place.home,
-};
+export type Day = keyof typeof week;
+export type Place = (typeof place)[keyof typeof place];
