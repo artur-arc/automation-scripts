@@ -16,3 +16,27 @@ export interface AutomationResult {
   skippedCount: number;
   errors: string[];
 }
+
+export const week = {
+  sun: 'Day1',
+  mon: 'Day2',
+  tue: 'Day3',
+  wed: 'Day4',
+  thu: 'Day5',
+} as const;
+
+export const place = {
+  office: 'office',
+  home: 'home',
+} as const;
+
+type Day = keyof typeof week;
+type Place = (typeof place)[keyof typeof place];
+
+export const schedule: Record<Day, Place> = {
+  sun: place.home,
+  mon: place.home,
+  tue: place.home,
+  wed: place.home,
+  thu: place.home,
+};

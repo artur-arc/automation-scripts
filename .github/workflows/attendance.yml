@@ -2,7 +2,7 @@ name: Attendance Automation
 on:
   schedule:
     - cron: '0 16 * * 4' # Every Thursday at 19:00 Israel Time (16:00 UTC)
-  workflow_dispatch: # Allows manual trigger
+  workflow_dispatch:
 
 jobs:
   run-automation:

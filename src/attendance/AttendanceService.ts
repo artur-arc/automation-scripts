@@ -1,7 +1,6 @@
 import { Page } from '@playwright/test';
-import { LoginPage } from './pages/LoginPage.js';
-import { AttendancePage } from './pages/AttendancePage.js';
-import { AutomationResult } from './types/index.js';
+import { AutomationResult, week, schedule, place } from './types';
+import { AttendancePage, LoginPage } from './pages';
 import { logger } from '../utils';
 
 export class AttendanceService {
@@ -36,10 +35,14 @@ export class AttendanceService {
         try {
           await this.attendancePage.openAttendanceForDay(day);
 
+          const dayName = (Object.entries(week) as [keyof typeof week, string][]).find(
+            ([, code]) => code === dayType,
+          )?.[0];
+          const dayPlace = dayName ? schedule[dayName] : place.home;
           const record = {
             inTime: '09:00',
             outTime: '18:00',
-            remarks: dayType === 'Day1' || dayType === 'Day3' ? 'office' : undefined,
+            remarks: dayPlace === place.office ? 'office' : undefined,
           };
 
           await this.attendancePage.fillAttendance(record);

@@ -1,12 +1,11 @@
 import 'dotenv/config';
-import { runAutomation } from '../core/AutomationRunner.js';
-import { AttendanceService } from './AttendanceService.js';
+import { runAutomation } from '../core/AutomationRunner';
+import { AttendanceService } from './AttendanceService';
 import { logger } from '../utils';
 
 void (async (): Promise<void> => {
   const username = process.env.ATTENDANCE_LOGIN_USERNAME;
   const password = process.env.ATTENDANCE_LOGIN_PASSWORD;
-
   if (!username || !password) {
     logger.error('Missing ATTENDANCE_LOGIN_USERNAME or ATTENDANCE_LOGIN_PASSWORD in .env');
     process.exit(1);

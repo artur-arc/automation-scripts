@@ -1,6 +1,6 @@
-import { BasePage } from './BasePage.js';
 import { Page, Locator } from '@playwright/test';
-import { AttendanceRecord } from '../types/index.js';
+import { AttendanceRecord } from '../types';
+import { BasePage } from '../pages';
 
 export class AttendancePage extends BasePage {
   private readonly daySelector = '.weeks .day:not(.off-day)';

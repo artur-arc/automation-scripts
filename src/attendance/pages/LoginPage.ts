@@ -1,4 +1,4 @@
-import { BasePage } from './BasePage.js';
+import { BasePage } from '../pages';
 import { Page } from '@playwright/test';
 import { logger } from '../../utils';
 
