@@ -19,15 +19,15 @@ export class AttendancePage extends BasePage {
   }
 
   async findPinkDays(): Promise<Locator[]> {
+    await this.page.waitForSelector(this.daySelector, { state: 'visible' });
     const days = await this.page.locator(this.daySelector).all();
     const result: Locator[] = [];
 
     for (const day of days) {
       const hasPink = (await day.locator(this.pinkStatusSelector).count()) > 0;
       const hasGreen = (await day.locator(this.greenStatusSelector).count()) > 0;
-      const isToday = (await day.locator('.dateNumber.TODAY').count()) > 0;
 
-      if (hasPink && !hasGreen && !isToday) {
+      if (hasPink && !hasGreen) {
         result.push(day);
       }
     }
